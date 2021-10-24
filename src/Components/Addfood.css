@@ -1,0 +1,59 @@
+.addfood-container{
+    margin-top: 100px;
+}
+.card{
+    width: 300px;
+    box-shadow: 1px 1px 3px rgb(199, 199, 199);
+}
+.card-text{
+    font-weight: 600;
+    color:grey;
+}
+.card-text span{
+    color:rgb(3, 3, 3);
+    font-weight: 700;
+    word-spacing: 2px;
+}
+.cardcontainer{
+    display: flex;
+    justify-content: center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+.card-2{
+    border-radius:10px ;
+    width:90%;
+    box-shadow: 1px 1px 3px rgb(185, 185, 185);
+}
+.card-items{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    align-items: stretch;
+}
+.buttonleft{
+    margin-left: auto;
+}
+.searchcon{
+    position:relative;
+}
+.innerbtn{
+    position: absolute;
+    right:0%;
+    z-index: 3;
+}
+.searchcon:focus{
+    border:none;
+}
+@media screen and (max-width:350px)
+{
+    .card{
+        width:90%;
+    }
+    .card-items{
+        flex-direction: column;
+    }
+    .buttonleft{
+        margin: auto;
+    }
+}

@@ -1,0 +1,12 @@
+.verifymes{
+    background-color: rgb(32, 32, 32);
+    color:white;
+    max-width: 500px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 25px;
+    padding: 20px;
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 70px;
+}

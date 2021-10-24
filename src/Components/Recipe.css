@@ -1,0 +1,20 @@
+.recipecon{
+    background:url("../Assets/pexels-klaus-nielsen-6287225.jpg");
+    height:50vh;
+    margin-top: 70px;
+    background-size:cover;
+    background-position:center top;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+}
+.searchicon{
+    color:black;
+    font-size: 20px;
+    right:1%;
+    transform: translateY(50%);
+}
+.cardrecipe{
+    cursor: pointer;
+}

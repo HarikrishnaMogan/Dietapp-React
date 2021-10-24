@@ -1,0 +1,20 @@
+
+.navbar{
+    background-color: rgb(3, 133, 89);
+   
+    height:70px;
+}
+.nav-link,.navbar-brand{
+    font-size: 30px;
+    color:rgb(0, 75, 34);
+  
+}
+
+.icons,.nav-link:hover,.navbar-brand{
+    color:rgb(255, 255, 255);
+   
+    
+}
+.navbar-nav{
+    margin-left: auto;
+}

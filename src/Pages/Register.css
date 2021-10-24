@@ -1,0 +1,59 @@
+.input-group{
+    margin-top:30px;
+}
+
+.form-div{
+    width:400px;
+    background-color: rgba(201, 201, 201, 0.897);
+    color:rgb(59, 59, 59);
+    padding: 20px;
+    border-radius: 30px;
+}
+.signup-info{
+    width:max-content;
+    background-color: rgb(37, 37, 37);
+    color:rgb(241, 241, 241);
+    font-weight:400;
+    border-radius: 30px;
+    position: absolute;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    margin:auto;
+    animation-name:slidedown;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+
+    
+}
+@keyframes slidedown{
+    0% {top:-10%}
+    100% {top:1%}
+}
+.re{
+    min-height:100vh;
+    background-image:url("../Assets/breakfast-geb94631ba_1920.jpg");
+    background-position: center;
+    background-size:cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+}
+.form-parent{
+    display:flex;
+    justify-content: center;
+}
+
+@media screen and (max-width:500px)
+{
+   .form-div,.signup-info{
+       width:80%;
+   }
+   .input-group{
+    margin-top:10px;
+}
+
+  
+}
