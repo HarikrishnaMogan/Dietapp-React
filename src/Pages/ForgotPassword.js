@@ -82,20 +82,16 @@ export default function ForgotPassword(props)
               <div className="form-div">
                <h2 className="Sign Up">Forgot Password</h2> 
             <Form>
-             <div className="input-group">
-                <div className="input-group-prepend">
-                  <div className="input-group-text">
-                    <MdEmail/>
-                    </div>
-                 </div>
+             <div className="formflex">
+                    <MdEmail className="icon"/>
              <Field type="email" name="email" className="form-control" placeholder="Email" />
              </div>
-             <ErrorMessage name="email"  className="text-danger" component="div"/>
+             <ErrorMessage name="email"  className="text-dark" component="div"/>
              <div className="text-center mt-3">
-             <button className="btn btn-outline-dark"  type="submit">Submit</button>
+             <button className="btn btn-outline-light"  type="submit">Submit</button>
              </div>
            </Form>
-           <Link to="/" >Login ?</Link>
+           <Link to="/" className="link" >Login ?</Link>
            </div>)}
            </div>
            )

@@ -7,11 +7,12 @@ function CalcCalories(values)
         let diffInWeight = values.weight-values.targetWeight;
         //if diffinweight less han zero that means user has to gain weight
         if(diffInWeight<0)
-        {
-             return (bmr*values.activityFactor +500);
+        {      let value = Math.trunc(bmr*values.activityFactor +500);
+             return value;
         }
         else{
-            return (bmr*values.activityFactor-500);
+            let value = Math.trunc(bmr*values.activityFactor-500);
+            return value;
         }
     }
     else
@@ -19,11 +20,12 @@ function CalcCalories(values)
         let bmr = Math.trunc(655+(9.563*values.weight)+(1.850*values.height)-(4.676*values.age));
         let diffInWeight = values.weight-values.targetWeight;
         if(diffInWeight<0)
-        {
-             return (bmr*values.activityFactor+500);
+        {   let value = Math.trunc(bmr*values.activityFactor+500);
+             return value;
         }
         else{
-            return (bmr*values.activityFactor-500);
+            let value = Math.trunc(bmr*values.activityFactor-500);
+            return value;
         }
         
     }

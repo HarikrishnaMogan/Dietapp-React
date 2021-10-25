@@ -2,7 +2,6 @@
 import {Formik,Form,Field,ErrorMessage} from "formik";
 import {FaLock} from "react-icons/fa";
 import { AiFillEye,AiFillEyeInvisible } from "react-icons/ai";
-import { Button } from "react-bootstrap";
 import { useState } from "react";
 import "./Register.css";
 import axios from "axios";
@@ -84,25 +83,19 @@ export default function PassReset(props)
               <div className="form-div">
                <h2 className="Sign Up">New Password</h2> 
             <Form>
-             <div className="input-group">
-                <div className="input-group-prepend">
-                  <div className="input-group-text">
-                    <FaLock/>
-                    </div>
-                 </div>
+             <div className="formflex">
+                    <FaLock className="icon"/>
              <Field type={showpassword ? "password":"text"} name="password" className="form-control" placeholder="Password" />
-              <div className="input-group-append" >
-                    <Button className="input-group-btn btn-dark" onClick={()=>{Setshowpassward(!showpassword)}}>
+                    <button type="button" className="passbtn" onClick={()=>{Setshowpassward(!showpassword)}}>
                       {showpassword ? <AiFillEyeInvisible/>:<AiFillEye/>} 
-                    </Button>
-              </div>
+                    </button>
              </div>
-             <ErrorMessage name="password" className="text-danger" component="div"/>
+             <ErrorMessage name="password" className="text-dark" component="div"/>
              <div className="text-center mt-3">
-             <button className="btn btn-outline-dark"  type="submit">Sign Up</button>
+             <button className="btn btn-outline-light"  type="submit">Sign Up</button>
              </div>
            </Form>
-           <Link to="/" >Login ?</Link>
+           <Link to="/" className="link">Login ?</Link>
            </div>)}
            </div>
            )

@@ -4,10 +4,10 @@
 
 .form-div{
     width:400px;
-    background-color: rgba(201, 201, 201, 0.897);
-    color:rgb(59, 59, 59);
+    background-color: rgb(126, 184, 134);
+    color:rgb(248, 252, 250);
     padding: 20px;
-    border-radius: 30px;
+    border-radius: 50px 0;
 }
 .signup-info{
     width:max-content;
@@ -33,7 +33,7 @@
 }
 .re{
     min-height:100vh;
-    background-image:url("../Assets/breakfast-geb94631ba_1920.jpg");
+    background:linear-gradient(rgba(0, 0, 0, 0.24),rgba(0, 0, 0, 0.219)),url("../Assets/pexels-lumn-1028598.jpg");
     background-position: center;
     background-size:cover;
     display: flex;
@@ -45,7 +45,28 @@
     display:flex;
     justify-content: center;
 }
-
+.formflex{
+    display: flex;
+    align-items:center;
+    flex-direction: row;
+    gap:2px;
+    margin-top:10px;
+    position: relative;
+}
+.icon{
+    height:30px;
+    width:25px;
+}
+.passbtn{
+    position: absolute;
+    right:0%;
+    background: transparent;
+    border: none;
+    padding: 10px;
+}
+.link{
+    color:green;
+}
 @media screen and (max-width:500px)
 {
    .form-div,.signup-info{

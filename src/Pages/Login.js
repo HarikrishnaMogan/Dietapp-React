@@ -3,7 +3,6 @@ import {Formik,Form,Field,ErrorMessage} from "formik";
 import {FaLock} from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { AiFillEye,AiFillEyeInvisible } from "react-icons/ai";
-import { Button } from "react-bootstrap";
 import { useState,useEffect } from "react";
 import "./Register.css";
 import axios from "axios";
@@ -33,17 +32,16 @@ export default function LoginUser()
            setdata(data);
            if(data.authtoken)
            {
-                localStorage.setItem("authtoken", data.authtoken);
-                history.push("/diethome");
+            localStorage.setItem("authtoken", data.authtoken);
+            history.push("/diethome");
            }
+         
         }
         catch(err)
         {
           console.log(err);
           Setload(false);
         }
-        
-       
       }
 
        useEffect(()=>{
@@ -96,38 +94,28 @@ export default function LoginUser()
               <div className="form-div">
                <h2 className="Sign Up">LogIn</h2> 
             <Form>
-             <div className="input-group">
-                <div className="input-group-prepend">
-                  <div className="input-group-text">
-                    <MdEmail/>
-                    </div>
-                 </div>
+             <div className="formflex">
+                    <MdEmail className="icon"/>
              <Field type="email" name="email" className="form-control" placeholder="Email" />
              </div>
-             <ErrorMessage name="email"  className="text-danger" component="div"/>
-             <div className="input-group">
-                <div className="input-group-prepend">
-                  <div className="input-group-text">
-                    <FaLock/>
-                    </div>
-                 </div>
+             <ErrorMessage name="email"  className="text-dark" component="div"/>
+             <div className="formflex">
+                    <FaLock className="icon"/>
              <Field type={showpassword ? "password":"text"} name="password" className="form-control" placeholder="Password" />
-              <div className="input-group-append" >
-                    <Button className="input-group-btn btn-dark" onClick={()=>{Setshowpassward(!showpassword)}}>
+                    <button type="button" className="passbtn" onClick={()=>{Setshowpassward(!showpassword)}}>
                       {showpassword ? <AiFillEyeInvisible/>:<AiFillEye/>} 
-                    </Button>
-              </div>
+                    </button>
              </div>
-             <ErrorMessage name="password" className="text-danger" component="div"/>
+             <ErrorMessage name="password" className="text-dark" component="div"/>
              <div className="text-center mt-3">
-             <button className="btn btn-outline-dark"  type="submit">logIn</button>
+             <button className="btn btn-outline-light"  type="submit">logIn</button>
              </div>
            </Form>
             <p>
-            <Link to="/register">Register ?</Link>
+            <Link to="/register" className="link">Register ?</Link>
             </p>
            <p>
-           <Link to="/forgotpassword">Forgot Password ?</Link>
+           <Link to="/forgotpassword"className="link">Forgot Password ?</Link>
            </p>
            </div>)}
            </div>

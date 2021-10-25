@@ -12,7 +12,7 @@ export default function Userdetails()
      const decimal = /^[1-9]\d*(\.\d+)?$/;
      const integer = /^[1-9]\d*$/;
       const history = useHistory();
-
+        console.log(history);
      
 
       let postuser = async(values)=>{
@@ -32,7 +32,7 @@ export default function Userdetails()
               gender:values.gender,
               totalDays:days,
               caloriesNeed:caloriesNeed
-          })
+          },{headers:{authtoken:localStorage.getItem("authtoken")}})
           if(data.success)
           {
                 history.push("/diethome");

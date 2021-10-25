@@ -2,22 +2,70 @@ import {useEffect,useContext, useState} from "react";
 import authaxios from "../Axios";
 import {Link} from "react-router-dom";
 import {UserContext} from "../Context/UserContext";
-import {PUTDATA} from "../Context/UserReducer";
+import {PUTDATA,GETDATA} from "../Context/UserReducer";
 import "./Diethome.css";
 import {FaUserCog} from "react-icons/fa";
 import { AiFillPlusCircle,AiFillMinusCircle } from "react-icons/ai";
+import {useHistory} from "react-router-dom";
 
 
 function DietHome()
 {
    
-   const {userState,dispatch,checkUserDetails} = useContext(UserContext);
+   const {userState,dispatch} = useContext(UserContext);
     const[circleAnim,SetCircAnim] = useState({anim1:false,anim2:false,anim3:false});
-
+      const history = useHistory();
+   
    
     
+      //to get user data
+    let checkUserDetails=async()=>{
+      try{
+
+      let date = new Date().toDateString();
+      const {data} = await authaxios.get("/userInfo",{headers:{authtoken:localStorage.getItem("authtoken")}});
+      console.log(data);
+      if(!data)
+      {
+         history.push("/userdetails");
+         
+      }
+      else if(date !== data.date)
+      {
+          updateDay(data);
+      }
+      else
+      {
+          dispatch({type:GETDATA,payload:data});
+      }
+  }
+  catch(err)
+  {
+      console.log(err);
+   
+  }
+  
+   }
+
+   //to update everday calories in database
+  let updateDay =async(data)=>{
+    
+    let date = new Date().toDateString();
+    let temptrack = [...data.track];
+        let addprevday = {calories:data.calories,water:data.water,date:data.date,food:data.food};
+         temptrack.push(addprevday);
+      const {data:updatedData} = await authaxios.put(`userInfo/calories/${data._id}`,{
+         track:temptrack,
+         calories:0,
+         date:date,
+         food:[],
+         water:0
+      },{headers:{authtoken:localStorage.getItem("authtoken")}});
+     dispatch({type:GETDATA,payload:updatedData});
+} 
+    
     useEffect(()=>{
-       if(!userState.userId)
+       if(userState.userId===undefined)
        {
          checkUserDetails();
        }
@@ -25,6 +73,8 @@ function DietHome()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
     
+
+
     //to update water in database
     let updateWater= async(oper)=>{
        try{
@@ -40,7 +90,7 @@ function DietHome()
  
          const {data} = await authaxios.put(`userInfo/calories/${userState._id}`,{
             water:water
-         });
+         },{headers:{authtoken:localStorage.getItem("authtoken")}});
          dispatch({type:PUTDATA,payload:data})
        }
        catch(err)
@@ -71,7 +121,7 @@ function DietHome()
        </div>
        <div className="userdiv"   onMouseEnter={()=>{SetCircAnim({...circleAnim,anim1:true})}} >
           <div id="userdetails">
-           <h1>{userState.userName} <Link className=" btn btn-outline-light" to="/edituser"> <FaUserCog /></Link></h1>
+           <h1>{userState.userName} <Link className=" btn btn-outline-light" to= "/UserInfo"> <FaUserCog /></Link></h1>
             <Link to="/track" className="btn btn-outline-light my-3">Track</Link>
            <p><span>{userState.totalDays}</span> days challenge!!</p>
           </div>

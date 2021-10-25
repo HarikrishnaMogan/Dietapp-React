@@ -1,7 +1,7 @@
 import {InputGroup,FormControl,Button} from "react-bootstrap";
 import "./Addfood.css";
 import axios from "axios";
-import { useState,useContext,useEffect } from "react";
+import { useState,useContext} from "react";
 import authaxios from "../Axios";
 import { UserContext } from "../Context/UserContext";
 import {PUTDATA} from "../Context/UserReducer";
@@ -13,7 +13,7 @@ function Addfood()
 {
     const [search,Setsearch] = useState("");
     const[food,Setfood] = useState([]);
-    const {userState,checkUserDetails,dispatch} = useContext(UserContext);
+    const {userState,dispatch} = useContext(UserContext);
     const[load,Setload] = useState(false);
     const[load2,Setload2] = useState(false);
 
@@ -38,13 +38,7 @@ function Addfood()
          }
     }
 
-    //to get data if refreshed
-    useEffect(()=>{
-      if(!userState.userId)
-      {
-        checkUserDetails();
-      }
-    });
+    
 
     //to add food and calories in database
      let adddata= async(foodObject,index)=>{
@@ -59,7 +53,7 @@ function Addfood()
            const {data} = await authaxios.put(`userInfo/calories/${userState._id}`,{
              food:tempfood,
              calories:calories
-           })
+           },{headers:{authtoken:localStorage.getItem("authtoken")}})
 
            console.log(data);
            dispatch({type:PUTDATA,payload:data});
@@ -83,7 +77,7 @@ function Addfood()
                 const {data} = await authaxios.put(`userInfo/calories/${userState._id}`,{
                   food:tempfood,
                   calories:calories
-                });
+                },{headers:{authtoken:localStorage.getItem("authtoken")}});
                 console.log(data);
                 Setload2(false);
                 dispatch({type:PUTDATA,payload:data});
