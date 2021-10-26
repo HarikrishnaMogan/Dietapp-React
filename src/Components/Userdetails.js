@@ -4,19 +4,27 @@ import "../Pages/Register.css";
 import { useHistory } from "react-router-dom";
 import authaxios from "../Axios";
 import CalcCalories from "./CalculateCalories";
+import {UserContext} from "../Context/UserContext";
+import { useContext, useState } from "react";
+import {PUTDATA} from "../Context/UserReducer";
+import {SyncLoader} from "react-spinners";
 
 
 
-export default function Userdetails()
+export default function Userdetails({userinfo})
 {
      const decimal = /^[1-9]\d*(\.\d+)?$/;
      const integer = /^[1-9]\d*$/;
       const history = useHistory();
-        console.log(history);
+       const {userState,dispatch} = useContext(UserContext);
+       const [load,setload] = useState(false);
      
 
+
+     //to create user info at first time
       let postuser = async(values)=>{
         try{
+          setload(true);
            //calculating days
           const weightdiff = Math.abs(values.weight-values.targetWeight);
           const days = weightdiff*7*2;
@@ -33,6 +41,7 @@ export default function Userdetails()
               totalDays:days,
               caloriesNeed:caloriesNeed
           },{headers:{authtoken:localStorage.getItem("authtoken")}})
+          setload(false);
           if(data.success)
           {
                 history.push("/diethome");
@@ -44,19 +53,54 @@ export default function Userdetails()
         }
 
       }
+      
+      let changeplan = async(values)=>{
+        try{
+          setload(true);
+          //calculating days
+         const weightdiff = Math.abs(values.weight-values.targetWeight);
+         const days = weightdiff*7*2;
+         //calculating calories
+          let caloriesNeed =  CalcCalories(values);
+
+         const {data} = await authaxios.put(`/userInfo/${userState._id}`,{
+             height:values.height,
+             weight:values.weight,
+             targetWeight:values.targetWeight,
+             age:values.age,
+             activityFactor:values.activityFactor,
+             gender:values.gender,
+             totalDays:days,
+             caloriesNeed:caloriesNeed
+         },{headers:{authtoken:localStorage.getItem("authtoken")}});
+           setload(false);
+         dispatch({type:PUTDATA,payload:data});
+         history.push("/diethome");
+        
+       }
+       catch(err)
+       {
+         console.log(err);
+       }
+
+      }
+
+
+
+
 
     return(
       <>
-      <div className="re" >
+      <div className={userinfo ? "no" :"re"} >
       
         <Formik 
           initialValues={{
-            height:"",
-            weight:"",
-            targetWeight:"",
-            age:"",
-            activityFactor:"",
-            gender:""
+            height:userState.height ? userState.height:"",
+            weight:userState.weight ? userState.weight:"",
+            targetWeight:userState.targetWeight ? userState.targetWeight:"",
+            age:userState.age ? userState.age:"",
+            activityFactor:userState.activityFactor ? userState.activityFactor:"",
+            gender:userState.gender ? userState.gender:""
           }
           }
 
@@ -104,35 +148,37 @@ export default function Userdetails()
           }}
          
           onSubmit={(values)=>{
-            postuser(values);
+            //if user exists the change plan or create a plan
+           userinfo ? changeplan(values): postuser(values);
           }}
         >
          {()=>{
            return(
              <div  className="form-parent">
+               {load ? <SyncLoader/> :(
               <div className="form-div my-3" >
                <h2 className="Sign Up">Details</h2> 
             <Form>
               <div className="form-group">
                 <label>Height</label>
              <Field type="number" name="height" className="form-control" placeholder="height in cm" />
-             <ErrorMessage name="height"  className="text-danger" component="div"/>
+             <ErrorMessage name="height"  className="text-dark" component="div"/>
              </div>
              
              <div className="form-group">
                 <label>Weight</label>
              <Field type="number" name="weight" className="form-control" placeholder="Weight in Kg" />
-             <ErrorMessage name="weight"  className="text-danger" component="div"/>
+             <ErrorMessage name="weight"  className="text-dark"  component="div"/>
              </div>
              <div className="form-group">
                 <label>Target Weight</label>
              <Field type="number" name="targetWeight" className="form-control" placeholder="Weight in Kg" />
-             <ErrorMessage name="targetWeight"  className="text-danger" component="div"/>
+             <ErrorMessage name="targetWeight"  className="text-dark"  component="div"/>
              </div>
              <div className="form-group">
                 <label>Age</label>
              <Field type="number" name="age" className="form-control" placeholder="Age" />
-             <ErrorMessage name="age"  className="text-danger" component="div"/>
+             <ErrorMessage name="age"  className="text-dark"  component="div"/>
              </div>
              <div className="form-group">
                 <label>Activity Factor</label>
@@ -153,10 +199,10 @@ export default function Userdetails()
               </Field>   
              </div> 
              <div className="text-center mt-3">
-             <button className="btn btn-outline-dark"  type="submit">Submit</button>
+             <button className="btn btn-outline-light"  type="submit">Submit</button>
              </div>
            </Form>
-           </div>
+           </div>)}
            </div>
            )
          }} 

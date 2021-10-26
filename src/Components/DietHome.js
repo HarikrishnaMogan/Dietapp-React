@@ -15,8 +15,8 @@ function DietHome()
    const {userState,dispatch} = useContext(UserContext);
     const[circleAnim,SetCircAnim] = useState({anim1:false,anim2:false,anim3:false});
       const history = useHistory();
-   
-   
+      let date = new Date().toDateString();
+     
     
       //to get user data
     let checkUserDetails=async()=>{
@@ -65,7 +65,7 @@ function DietHome()
 } 
     
     useEffect(()=>{
-       if(userState.userId===undefined)
+       if(userState.userId===undefined || date !==userState.date )
        {
          checkUserDetails();
        }

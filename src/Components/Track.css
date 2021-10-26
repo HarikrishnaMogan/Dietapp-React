@@ -1,0 +1,22 @@
+.trackcon{
+    margin-top: 100px;
+    cursor: pointer;
+}
+.cardcircle{
+    width:100px;
+    height:100px;
+    background: rgb(230, 81, 81);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+}
+.watercircle{
+    background: rgb(26, 199, 182);
+}
+.cardcirclecon{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 10px;
+}

@@ -13,6 +13,7 @@ import Userdetails from "./Components/Userdetails";
 import Addfood from "./Components/Addfood";
 import Recipe from "./Components/Recipe";
 import UserInfo from "./Components/UserInfo";
+import Track from "./Components/Track";
 
 
 
@@ -63,6 +64,7 @@ function App()
                <PrivateRoute path="/addfood" component={Addfood}/>
                <PrivateRoute path="/recipe" component={Recipe}/>
                <PrivateRoute path="/UserInfo" component={UserInfo}/>
+               <PrivateRoute path="/track" component={Track}/>
            </Switch>
          </BrowserRouter>
         </>
