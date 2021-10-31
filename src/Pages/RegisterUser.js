@@ -3,7 +3,7 @@ import {Formik,Form,Field,ErrorMessage} from "formik";
 import {FaUser,FaLock} from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { AiFillEye,AiFillEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./Register.css";
 import axios from "axios";
 import {Link} from "react-router-dom";
@@ -17,7 +17,11 @@ export default function RegisterUser(props)
       const[load,Setload] = useState(false);
       // eslint-disable-next-line no-useless-escape
       const validateEmail =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    
+        
+      useEffect(()=>{
+        localStorage.getItem("authtoken") && localStorage.removeItem("authtoken");
+        localStorage.getItem("userstate") && localStorage.removeItem("userstate");
+    },[])
       
       let registerUser = async({name,email,password})=>{
         try{

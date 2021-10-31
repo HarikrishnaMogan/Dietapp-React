@@ -44,9 +44,10 @@ export default function LoginUser()
         }
       }
 
-       useEffect(()=>{
-           localStorage.getItem("authtoken") && localStorage.removeItem("authtoken");
-       },[])
+      useEffect(()=>{
+        localStorage.getItem("authtoken") && localStorage.removeItem("authtoken");
+        localStorage.getItem("userstate") && localStorage.removeItem("userstate");
+    },[])
 
     return(
       <>

@@ -1,10 +1,10 @@
 import {InputGroup,FormControl,Button} from "react-bootstrap";
 import "./Addfood.css";
 import axios from "axios";
-import { useState,useContext} from "react";
+import { useState,useContext, useEffect} from "react";
 import authaxios from "../Axios";
 import { UserContext } from "../Context/UserContext";
-import {PUTDATA} from "../Context/UserReducer";
+import {PUTDATA,GETDATA} from "../Context/UserReducer";
 import {SyncLoader} from "react-spinners";
 import {FaSearch} from "react-icons/fa"
 
@@ -90,6 +90,25 @@ function Addfood()
              Setload2(false);
            }
      }
+      
+      //useeffect to persist food in localstorage
+      useEffect(()=>{
+        if(userState.userId!==undefined)
+        {
+          window.localStorage.setItem("userstate",JSON.stringify(userState));
+        }
+       
+      },[userState]);
+
+      //to get data from local storage when refreshed
+      useEffect(()=>{
+      
+          let data = JSON.parse(localStorage.getItem("userstate"));
+          dispatch({type:GETDATA,payload:data});
+      
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      },[]);
+
 
    return(
        <div className="container addfood-container">

@@ -1,7 +1,7 @@
 
 import {Formik,Form,Field,ErrorMessage} from "formik";
 import { MdEmail } from "react-icons/md";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./Register.css";
 import axios from "axios";
 import {Link} from "react-router-dom";
@@ -15,7 +15,10 @@ export default function ForgotPassword(props)
       // eslint-disable-next-line no-useless-escape
       const validateEmail =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
       
-      
+      useEffect(()=>{
+        localStorage.getItem("authtoken") && localStorage.removeItem("authtoken");
+        localStorage.getItem("userstate") && localStorage.removeItem("userstate");
+    },[])
       let submitemail = async({email})=>{
         try{
           Setload(true);

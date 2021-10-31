@@ -151,6 +151,8 @@ export default function Userdetails({userinfo})
             //if user exists the change plan or create a plan
            userinfo ? changeplan(values): postuser(values);
           }}
+
+          enableReinitialize
         >
          {()=>{
            return(

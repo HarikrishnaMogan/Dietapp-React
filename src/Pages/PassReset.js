@@ -2,7 +2,7 @@
 import {Formik,Form,Field,ErrorMessage} from "formik";
 import {FaLock} from "react-icons/fa";
 import { AiFillEye,AiFillEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import "./Register.css";
 import axios from "axios";
 import {Link,useParams} from "react-router-dom";
@@ -18,7 +18,10 @@ export default function PassReset(props)
       const[load,Setload] = useState(false);
      console.log(props);
      
-      
+     useEffect(()=>{
+      localStorage.getItem("authtoken") && localStorage.removeItem("authtoken");
+      localStorage.getItem("userstate") && localStorage.removeItem("userstate");
+  },[])
       
       let reset = async({password})=>{
         try{

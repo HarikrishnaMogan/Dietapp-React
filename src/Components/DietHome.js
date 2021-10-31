@@ -1,4 +1,4 @@
-import {useEffect,useContext, useState} from "react";
+import {useEffect,useContext} from "react";
 import authaxios from "../Axios";
 import {Link} from "react-router-dom";
 import {UserContext} from "../Context/UserContext";
@@ -7,15 +7,17 @@ import "./Diethome.css";
 import {FaUserCog} from "react-icons/fa";
 import { AiFillPlusCircle,AiFillMinusCircle } from "react-icons/ai";
 import {useHistory} from "react-router-dom";
+import {InView} from "react-intersection-observer";
 
 
 function DietHome()
 {
    
    const {userState,dispatch} = useContext(UserContext);
-    const[circleAnim,SetCircAnim] = useState({anim1:false,anim2:false,anim3:false});
+   
       const history = useHistory();
       let date = new Date().toDateString();
+     
      
     
       //to get user data
@@ -63,16 +65,8 @@ function DietHome()
       },{headers:{authtoken:localStorage.getItem("authtoken")}});
      dispatch({type:GETDATA,payload:updatedData});
 } 
-    
-    useEffect(()=>{
-       if(userState.userId===undefined || date !==userState.date )
-       {
-         checkUserDetails();
-       }
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
-    
+   
+
 
 
     //to update water in database
@@ -99,14 +93,27 @@ function DietHome()
        }
       
     }
-  
 
 
+    
+ 
+    //to get user details
+    useEffect(()=>{
+      if(userState.userId===undefined || date !==userState.date )
+      {
+        checkUserDetails();
+      }
+      
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   },[]);
+   
+    //to persist user details
+    useEffect(()=>{
+       window.localStorage.setItem("userstate",JSON.stringify(userState));
+    },[userState]);
+    
 
-
-
-
-
+    
 
 
     return(
@@ -119,7 +126,9 @@ function DietHome()
           </div>
           
        </div>
-       <div className="userdiv"   onMouseEnter={()=>{SetCircAnim({...circleAnim,anim1:true})}} >
+       <InView threshold={0.6}>
+          {({ref,inView})=>(
+       <div className="userdiv" ref={ref} >
           <div id="userdetails">
            <h1>{userState.userName} <Link className=" btn btn-outline-light" to= "/UserInfo"> <FaUserCog /></Link></h1>
             <Link to="/track" className="btn btn-outline-light my-3">Track</Link>
@@ -127,15 +136,19 @@ function DietHome()
           </div>
           <div className="circle bg-light">
              <p id="circle-content">{Math.round(userState.calories)}/{userState.caloriesNeed} kcal</p>
-             <div className={circleAnim.anim1?"circle-float-blue":""} ></div>
+             <div className={inView?"circle-float-blue":""} ></div>
           </div>
           <div className="dec"></div>
        </div>
-       <div className="quote"><p>A balanced diet is having a cupcake in each hand!!</p></div>
-       <div className="food" onMouseEnter={()=>{SetCircAnim({...circleAnim,anim2:true})}}>
+          )}
+       </InView>
+       {/*<div className="quote"><p>A balanced diet is having a cupcake in each hand!!</p></div>*/}
+       <InView threshold={0.6}>
+          {({ref,inView})=>(
+       <div className="food" ref={ref}>
           <div className="circle bg-success">
           <p>{Math.trunc((userState.calories/userState.caloriesNeed)*100)} %</p>
-          <div className={circleAnim.anim2?"circle-float":""} ></div>
+          <div className={inView ?"circle-float":""} ></div>
           </div>
           <div className="addfood">
               <p className="bold">Better food, Better Mood!!</p>
@@ -147,11 +160,14 @@ function DietHome()
                </div>   
           </div>
        </div>
-       <div className="quote quote2"><p>I'm on seafood diet, I see food and i eat it!!</p></div>
-       <div className="food water"   onMouseEnter={()=>{SetCircAnim({...circleAnim,anim3:true})}}>
+          )}
+       </InView>
+       {/*<div className="quote quote2"><p>I'm on seafood diet, I see food and i eat it!!</p></div>*/}
+       <InView threshold={0.6}>
+          {({ref,inView})=>(
+       <div className="food water" ref={ref}  >
        <div className="addfood">
               <p className="bold"> I drink water,just to surprise my liver</p>
-              <p className="bold">Drink 8 glasses of water</p>
               <div className="progress ">
                  <div className="progress-bar bg-danger" style={{width:`${Math.trunc((userState.water/8)*100)}%`}}>{userState.water} glasses</div>
                </div> 
@@ -162,10 +178,12 @@ function DietHome()
           </div>
           <div className="circle bg-danger">
           <p>{Math.trunc((userState.water/8)*100)} %</p>
-          <div className={circleAnim.anim3?"circle-float":""} ></div>
+          <div className={inView ?"circle-float":""} ></div>
           </div>
           
        </div>
+          )}
+       </InView>
        </div>
         </>
     )

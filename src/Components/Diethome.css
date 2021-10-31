@@ -1,5 +1,5 @@
 .userdiv,.welcome{
-    height:100vh;
+    height:110vh;
     width:100%;
     background:linear-gradient(rgba(0, 0, 0, 0.24),rgba(0, 0, 0, 0.219)), url("../Assets/pexels-mikhail-nilov-6707690.jpg");
     background-size:cover;
@@ -15,14 +15,9 @@
      gap:30px;
      position: relative;
      color:White;
+   
 }
-.userdiv:after{
-    transform: skewX(3deg);
-    position: absolute;
-    width:300px;
-    height: 300px;
-    background-color: blue;
-}
+
 .welcome{
     background:linear-gradient(rgba(0, 0, 0, 0.24),rgba(0, 0, 0, 0.219)),url("../Assets/pexels-mikhail-nilov-6707378.jpg") ;
     background-position: center top;
@@ -75,13 +70,9 @@
 .container-fluid{
     padding: 0;
     margin:0;
+   
 }
-.edituser{
-    color:black;
-}
-.edituser:hover{
-    color:gray;
-}
+
 
 .food{
     display: flex;
@@ -95,11 +86,14 @@
     background-size:cover;
     background-repeat: no-repeat;
     background-position:center;
-    min-height:100vh;
+    min-height:110vh;
     background-attachment: fixed;
+   
+  
    
     
 }
+
 .addfood{
     min-width:60%;
     text-align: center;
@@ -107,8 +101,9 @@
 .bold,.progress{
     margin: 40px 0;
     color:rgb(255, 255, 255);
+
 }
-.bold,.quote,.addandSubtract{
+.bold,.addandSubtract{
     font-size: 50px;
 }
 .quote{
@@ -125,12 +120,14 @@
     text-align: center;
     color: rgb(255, 255, 255);
     font-style: italic;
-    font-weight: 700;
+    font-weight: 600;
     word-spacing: 2px;
     z-index: 2;
+    font-size: 30px;
 }
+
 .water{
-    background:linear-gradient(rgba(0, 0, 0, 0.24),rgba(0, 0, 0, 0.219)),url("../Assets/pexels-kampus-production-6481583.jpg") ;
+    background:linear-gradient(rgba(0, 0, 0, 0.24),rgba(0, 0, 0, 0.219)),url("../Assets/pexels-dziana-hasanbekava-7275452\ \(1\).jpg") ;
     background-size:cover;
     background-repeat: no-repeat;
     background-position:center;

@@ -17,9 +17,9 @@ function Verifyuser()
             Setdata(data);
            if(data.success)
            {   
-               setTimeout(()=>{
+               
                    history.push("/");
-               },3000);
+              
                
            }
           }

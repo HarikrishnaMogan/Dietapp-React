@@ -1,19 +1,25 @@
 
 .navbar{
-    background-color: rgb(3, 133, 89);
-   
+   /* background-color: rgb(3, 133, 89);*/
     height:70px;
 }
 .nav-link,.navbar-brand{
     font-size: 30px;
-    color:rgb(0, 75, 34);
+    /*color:rgb(0, 75, 34);*/
+    color:rgb(0, 0, 0);
   
 }
 
-.icons,.nav-link:hover,.navbar-brand{
-    color:rgb(255, 255, 255);
+.icons,.nav-link:hover{
+   /* color:rgb(255, 255, 255);*/
+    color:rgb(243, 243, 243);
+    background-color: rgb(69, 170, 114);
+    border-radius: 300px; 
+    text-align: center;
    
-    
+}
+.nav-link{
+    margin-left: 5px;
 }
 .navbar-nav{
     margin-left: auto;

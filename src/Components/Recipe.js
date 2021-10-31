@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState,useEffect,useContext } from "react";
 import {InputGroup,FormControl,Card,Modal,Button} from "react-bootstrap";
 import {FaSearch} from "react-icons/fa";
 import "./Recipe.css";
 import axios from "axios";
 import {SyncLoader} from "react-spinners";
+import {GETDATA} from "../Context/UserReducer";
+import {UserContext} from "../Context/UserContext";
 
 function Recipe()
 {
@@ -12,6 +14,7 @@ function Recipe()
     const[load,setload] = useState(false);
     const [show, setShow] = useState(false);
     const[ing,Seting] = useState({label:"",ingredients:[],url:"#"});
+    const {dispatch} = useContext(UserContext);
 
     const handleClose = () => setShow(false);
     const handleShow = (ingredients,label,url) => {
@@ -27,7 +30,15 @@ function Recipe()
         Setfood(data.hits);
       console.log(data);
     }
- 
+    
+     //to get data from local storage when refreshed
+     useEffect(()=>{
+      
+      let data = JSON.parse(localStorage.getItem("userstate"));
+      dispatch({type:GETDATA,payload:data});
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
 
     return(
         <>

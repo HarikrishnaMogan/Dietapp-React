@@ -1,14 +1,15 @@
 import {Card,Modal,Button} from "react-bootstrap";
-import {useContext,useState} from "react";
+import {useContext,useEffect,useState} from "react";
 import {UserContext} from "../Context/UserContext";
+import {GETDATA} from "../Context/UserReducer";
 import "./Track.css";
 
 
 
 function Track()
 {  
-    const {userState} = useContext(UserContext);
-    const {track} = userState;
+    const {userState ,dispatch} = useContext(UserContext);
+    let {track} = userState;
     const [show, setShow] = useState(false);
     const [modal,setmodal] = useState({food:[],date:"",calories:""});
 
@@ -21,11 +22,18 @@ function Track()
     const handleClose = () => setShow(false);
 
 
+      //to get data from local storage if refreshed
+      useEffect(()=>{
+         let data = JSON.parse(localStorage.getItem("userstate"));
+         dispatch({type:GETDATA,payload:data});
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      },[]);
 
     return(
       <>
       <div className= " trackcon cardcontainer">
-        {track.map((track,index)=>{
+        {userState.track ? (<>
+        {userState.track.map((track,index)=>{
           return <Card key={index} onClick={()=>{openmodal(track)}}>
           <Card.Header>
               <Card.Title>Day {index+1}</Card.Title>
@@ -44,7 +52,8 @@ function Track()
           </Card.Header>
       </Card>
         })  
-    }
+    }</>):<></>}
+    {userState.track && track.length === 0 && <h1 className="display-4 font-weight-bold">User Track will be available after Day 1</h1>}
       </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

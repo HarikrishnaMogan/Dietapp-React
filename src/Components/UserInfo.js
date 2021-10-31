@@ -5,10 +5,10 @@ import { MdEmail } from "react-icons/md";
 import "../Pages/Register.css";
 import {useHistory} from "react-router-dom";
 import "./UserInfo.css";
-import {useContext, useState} from "react";
+import {useContext, useState,useEffect} from "react";
 import {UserContext} from "../Context/UserContext"; 
 import authaxios from "../Axios";
-import {CHANGEUSER} from "../Context/UserReducer";
+import {CHANGEUSER,GETDATA} from "../Context/UserReducer";
 import {SyncLoader} from "react-spinners";
 
 
@@ -38,6 +38,25 @@ function UserInfo(){
             console.log(err);
        }
      }
+     
+        //useeffect to persist food in localstorage
+        useEffect(()=>{
+          if(userState.userId!==undefined)
+          {
+            window.localStorage.setItem("userstate",JSON.stringify(userState));
+          }
+         
+        },[userState]);
+  
+        //to get data from local storage when refreshed
+        useEffect(()=>{
+        
+            let data = JSON.parse(localStorage.getItem("userstate"));
+            dispatch({type:GETDATA,payload:data});
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        },[]);
+     
 
    return (
        <>
@@ -79,6 +98,8 @@ function UserInfo(){
           onSubmit={(values)=>{
            updateNameAndEmail(values);
           }}
+          
+          enableReinitialize
         >
          {()=>{
            return(
@@ -111,7 +132,7 @@ function UserInfo(){
         </div>
        
        <div>
-         <h1 className="display-4 font-weight-bold text-light my-3 text-center">Change Plan</h1>
+         <h1 className="display-4 font-weight-bold text-dark my-3 text-center">Change Plan</h1>
        <Userdetails userinfo={true} />
        </div>
        </div>

@@ -16,9 +16,9 @@ function PassLinkVerify()
             Setdata(data);
            if(data.success)
            {   
-               setTimeout(()=>{
+              
                    history.push(`/resetpassword/${params.userId}/${params.token}`);
-               },3000);
+              
                
            }
           }
