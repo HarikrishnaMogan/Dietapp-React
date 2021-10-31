@@ -176,6 +176,7 @@
         justify-content: center;
     }
    .welcome,.food{
+       
        background-size: none;
    }
 }
