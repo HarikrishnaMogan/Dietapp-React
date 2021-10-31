@@ -26,7 +26,7 @@ function DietHome()
 
       let date = new Date().toDateString();
       const {data} = await authaxios.get("/userInfo",{headers:{authtoken:localStorage.getItem("authtoken")}});
-      console.log(data);
+     
       if(!data)
       {
          history.push("/userdetails");
@@ -126,7 +126,7 @@ function DietHome()
           </div>
           
        </div>
-       <InView threshold={0.6}>
+       <InView threshold={0.5}>
           {({ref,inView})=>(
        <div className="userdiv" ref={ref} >
           <div id="userdetails">
@@ -136,19 +136,19 @@ function DietHome()
           </div>
           <div className="circle bg-light">
              <p id="circle-content">{Math.round(userState.calories)}/{userState.caloriesNeed} kcal</p>
-             <div className={inView?"circle-float-blue":""} ></div>
+             <div className={inView?"circle-float-blue":"circle-float-blue-static"} ></div>
           </div>
           <div className="dec"></div>
        </div>
           )}
        </InView>
        {/*<div className="quote"><p>A balanced diet is having a cupcake in each hand!!</p></div>*/}
-       <InView threshold={0.6}>
+       <InView threshold={0.5}>
           {({ref,inView})=>(
        <div className="food" ref={ref}>
           <div className="circle bg-success">
           <p>{Math.trunc((userState.calories/userState.caloriesNeed)*100)} %</p>
-          <div className={inView ?"circle-float":""} ></div>
+          <div className={inView ?"circle-float":"circle-float-static"} ></div>
           </div>
           <div className="addfood">
               <p className="bold">Better food, Better Mood!!</p>
@@ -178,7 +178,7 @@ function DietHome()
           </div>
           <div className="circle bg-danger">
           <p>{Math.trunc((userState.water/8)*100)} %</p>
-          <div className={inView ?"circle-float":""} ></div>
+          <div className={inView ?"circle-float":"circle-float-static"} ></div>
           </div>
           
        </div>

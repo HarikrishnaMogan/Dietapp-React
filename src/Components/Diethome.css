@@ -46,7 +46,13 @@
  
 }
 
-
+.circle-float-static,.circle-float-blue-static{
+    width:200%;
+    height:200%;
+    position: absolute;
+    background-color: white;
+     border-radius:30% 45% 37% 40%;
+}
 .circle-float,.circle-float-blue{
     width:200%;
     height:200%;
@@ -57,7 +63,7 @@
      animation-fill-mode: forwards ;
      transform: translateY(10%);
 }
-.circle-float-blue{
+.circle-float-blue,.circle-float-blue-static{
     background-color: rgb(63, 168, 194);
 }
 #circle-content{
