@@ -177,7 +177,7 @@
     }
    .welcome,.food,.userdiv,.water{
 
-        min-height:100vh;
+       background-attachment: unset;
       
    }
 }
