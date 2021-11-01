@@ -191,4 +191,7 @@
     background-position:center;
     background-attachment: fixed;
    }
+   .food,.welcome,.userdiv{
+       min-height:95vh;
+   }
 }
