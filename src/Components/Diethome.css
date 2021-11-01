@@ -175,8 +175,9 @@
     .food{
         justify-content: center;
     }
-   .welcome,.food{
-       
-       background-size: none;
+   .welcome,.food,.userdiv,.water{
+
+        min-height:100vh;
+      
    }
 }
