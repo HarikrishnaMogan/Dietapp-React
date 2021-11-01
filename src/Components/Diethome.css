@@ -1,3 +1,4 @@
+
 .userdiv,.welcome{
     height:110vh;
     width:100%;
@@ -15,7 +16,6 @@
      gap:30px;
      position: relative;
      color:White;
-   
 }
 
 .welcome{
@@ -94,10 +94,6 @@
     background-position:center;
     min-height:110vh;
     background-attachment: fixed;
-   
-  
-   
-    
 }
 
 .addfood{
@@ -174,10 +170,25 @@
     }
     .food{
         justify-content: center;
+        background:linear-gradient(rgba(0, 0, 0, 0.24),rgba(0, 0, 0, 0.219)),url("../Assets/pexels-mikhail-nilov-6707689.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position:center;
+    background-attachment: fixed;
     }
-   .welcome,.food,.userdiv,.water{
 
-       background-attachment: unset;
-      
+   .welcome{
+    background:linear-gradient(rgba(0, 0, 0, 0.24),rgba(0, 0, 0, 0.219)),url("../Assets/pexels-daria-shevtsova-3629537.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position:center;
+    background-attachment: fixed;
+   }
+   .water{
+    background:linear-gradient(rgba(0, 0, 0, 0.24),rgba(0, 0, 0, 0.219)),url("../Assets/pexels-dziana-hasanbekava-7275452\ \(1\).jpg") ;
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position:center;
+    background-attachment: fixed;
    }
 }
